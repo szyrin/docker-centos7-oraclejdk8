@@ -43,3 +43,16 @@ RUN rm -rf "$JAVA_HOME/lib/missioncontrol" \
            "$JAVA_HOME/jre/lib/jfr" \
            "$JAVA_HOME/jre/lib/oblique-fonts" && \
     rm "/tmp/"*
+
+RUN wget -q http://apache-mirror.rbc.ru/pub/apache//jmeter/binaries/apache-jmeter-3.1.zip
+RUN wget -q https://repo1.maven.org/maven2/kg/apc/jmeter-plugins-manager/0.11/jmeter-plugins-manager-0.11.jar
+RUN wget -q https://repo1.maven.org/maven2/kg/apc/jmeter-plugins-json/2.4/jmeter-plugins-json-2.4.jar
+RUN wget -q https://repo1.maven.org/maven2/org/codehaus/groovy/groovy-all/2.4.7/groovy-all-2.4.7.jar
+
+RUN unzip apache-jmeter-3.1.zip -d ~/jmeter
+RUN mkdir -p ~/jmeter/apache-jmeter-3.1/lib/ext
+
+RUN mv jmeter-plugins-manager-0.11.jar ~/jmeter/apache-jmeter-3.1/lib/ext
+RUN mv jmeter-plugins-json-2.4.jar ~/jmeter/apache-jmeter-3.1/lib/
+RUN mv groovy-all-2.4.7.jar ~/jmeter/apache-jmeter-3.1/lib/
+
