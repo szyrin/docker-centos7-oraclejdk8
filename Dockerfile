@@ -4,6 +4,7 @@ RUN yum -y install deltarpm epel-release && yum -y update
 RUN yum -y install https://centos7.iuscommunity.org/ius-release.rpm
 RUN yum -y install python35u
 RUN yum -y install python35u-pip
+RUN cd /usr/bin && ln -s python3.5 python3 && cd -
 RUN curl -v -j -k -L https://s3.eu-central-1.amazonaws.com/docker-assets/dist/jdk-8u101-linux-x64.rpm > /tmp/jdk-8u101-linux-x64.rpm
 RUN yum -y install /tmp/jdk-8u101-linux-x64.rpm wget unzip \
     && alternatives --install /usr/bin/java     java    /usr/java/latest/bin/java 200000   \
