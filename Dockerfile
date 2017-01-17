@@ -5,13 +5,13 @@ RUN yum -y install https://centos7.iuscommunity.org/ius-release.rpm
 RUN yum -y install python35u
 RUN yum -y install python35u-pip
 RUN cd /usr/bin && ln -s python3.5 python3 && cd -
-RUN curl "https://s3.amazonaws.com/aws-cli/awscli-bundle.zip" -o "awscli-bundle.zip" && unzip awscli-bundle.zip && ./awscli-bundle/install -i /usr/local/aws -b /usr/local/bin/aws
 RUN curl -v -j -k -L https://s3.eu-central-1.amazonaws.com/docker-assets/dist/jdk-8u101-linux-x64.rpm > /tmp/jdk-8u101-linux-x64.rpm
 RUN yum -y install /tmp/jdk-8u101-linux-x64.rpm wget unzip \
     && alternatives --install /usr/bin/java     java    /usr/java/latest/bin/java 200000   \
     && alternatives --install /usr/bin/javaws   javaws  /usr/java/latest/bin/javaws 200000 \
     && alternatives --install /usr/bin/javac    javac   /usr/java/latest/bin/javac 200000
 
+RUN curl "https://s3.amazonaws.com/aws-cli/awscli-bundle.zip" -o "awscli-bundle.zip" && unzip awscli-bundle.zip && ./awscli-bundle/install -i /usr/local/aws -b /usr/local/bin/aws
 RUN rm -rf "$JAVA_HOME/"*src.zip
 
 RUN rm -rf "$JAVA_HOME/lib/missioncontrol" \
@@ -60,4 +60,3 @@ RUN mkdir -p ~/jmeter/apache-jmeter-3.1/lib/ext
 RUN mv jmeter-plugins-manager-0.11.jar ~/jmeter/apache-jmeter-3.1/lib/ext
 RUN mv jmeter-plugins-json-2.6.jar ~/jmeter/apache-jmeter-3.1/lib/
 RUN mv groovy-all-2.4.8.jar ~/jmeter/apache-jmeter-3.1/lib/
-
