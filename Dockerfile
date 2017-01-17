@@ -5,6 +5,7 @@ RUN yum -y install https://centos7.iuscommunity.org/ius-release.rpm
 RUN yum -y install python35u
 RUN yum -y install python35u-pip
 RUN cd /usr/bin && ln -s python3.5 python3 && cd -
+RUN curl "https://s3.amazonaws.com/aws-cli/awscli-bundle.zip" -o "awscli-bundle.zip" && unzip awscli-bundle.zip && ./awscli-bundle/install -i /usr/local/aws -b /usr/local/bin/aws
 RUN curl -v -j -k -L https://s3.eu-central-1.amazonaws.com/docker-assets/dist/jdk-8u101-linux-x64.rpm > /tmp/jdk-8u101-linux-x64.rpm
 RUN yum -y install /tmp/jdk-8u101-linux-x64.rpm wget unzip \
     && alternatives --install /usr/bin/java     java    /usr/java/latest/bin/java 200000   \
@@ -50,13 +51,13 @@ RUN rm -rf "$JAVA_HOME/lib/missioncontrol" \
 
 RUN wget -q http://apache-mirror.rbc.ru/pub/apache//jmeter/binaries/apache-jmeter-3.1.zip
 RUN wget -q https://repo1.maven.org/maven2/kg/apc/jmeter-plugins-manager/0.11/jmeter-plugins-manager-0.11.jar
-RUN wget -q https://repo1.maven.org/maven2/kg/apc/jmeter-plugins-json/2.4/jmeter-plugins-json-2.4.jar
-RUN wget -q https://repo1.maven.org/maven2/org/codehaus/groovy/groovy-all/2.4.7/groovy-all-2.4.7.jar
+RUN wget -q https://repo1.maven.org/maven2/kg/apc/jmeter-plugins-json/2.6/jmeter-plugins-json-2.6.jar
+RUN wget -q https://repo1.maven.org/maven2/org/codehaus/groovy/groovy-all/2.4.8/groovy-all-2.4.8.jar
 
 RUN unzip apache-jmeter-3.1.zip -d ~/jmeter
 RUN mkdir -p ~/jmeter/apache-jmeter-3.1/lib/ext
 
 RUN mv jmeter-plugins-manager-0.11.jar ~/jmeter/apache-jmeter-3.1/lib/ext
-RUN mv jmeter-plugins-json-2.4.jar ~/jmeter/apache-jmeter-3.1/lib/
-RUN mv groovy-all-2.4.7.jar ~/jmeter/apache-jmeter-3.1/lib/
+RUN mv jmeter-plugins-json-2.6.jar ~/jmeter/apache-jmeter-3.1/lib/
+RUN mv groovy-all-2.4.8.jar ~/jmeter/apache-jmeter-3.1/lib/
 
