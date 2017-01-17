@@ -11,7 +11,6 @@ RUN yum -y install /tmp/jdk-8u101-linux-x64.rpm wget unzip \
     && alternatives --install /usr/bin/javaws   javaws  /usr/java/latest/bin/javaws 200000 \
     && alternatives --install /usr/bin/javac    javac   /usr/java/latest/bin/javac 200000
 
-RUN curl "https://s3.amazonaws.com/aws-cli/awscli-bundle.zip" -o "awscli-bundle.zip" && unzip awscli-bundle.zip && ./awscli-bundle/install -i /usr/local/aws -b /usr/local/bin/aws
 RUN rm -rf "$JAVA_HOME/"*src.zip
 
 RUN rm -rf "$JAVA_HOME/lib/missioncontrol" \
@@ -49,6 +48,7 @@ RUN rm -rf "$JAVA_HOME/lib/missioncontrol" \
            "$JAVA_HOME/jre/lib/oblique-fonts" && \
     rm "/tmp/"*
 
+RUN curl "https://s3.amazonaws.com/aws-cli/awscli-bundle.zip" -o "awscli-bundle.zip" && unzip awscli-bundle.zip && ./awscli-bundle/install -i /usr/local/aws -b /usr/local/bin/aws
 RUN wget -q http://apache-mirror.rbc.ru/pub/apache//jmeter/binaries/apache-jmeter-3.1.zip
 RUN wget -q https://repo1.maven.org/maven2/kg/apc/jmeter-plugins-manager/0.11/jmeter-plugins-manager-0.11.jar
 RUN wget -q https://repo1.maven.org/maven2/kg/apc/jmeter-plugins-json/2.6/jmeter-plugins-json-2.6.jar
