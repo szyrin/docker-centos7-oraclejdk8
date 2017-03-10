@@ -3,7 +3,7 @@ FROM centos:7
 RUN yum -y install deltarpm epel-release && yum -y update
 RUN yum -y install https://centos7.iuscommunity.org/ius-release.rpm
 RUN yum -y install python35u
-RUN yum -y install python35u-pip
+RUN yum -y install python35u-pip supervisor
 RUN cd /usr/bin && ln -s python3.5 python3 && cd -
 RUN pip3.5 install cherrypy
 RUN curl -v -j -k -L https://s3.eu-central-1.amazonaws.com/docker-assets/dist/jdk-8u101-linux-x64.rpm > /tmp/jdk-8u101-linux-x64.rpm
